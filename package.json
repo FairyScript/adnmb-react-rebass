@@ -7,8 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.6.0",
+    "mobx": "^6.3.7",
+    "mobx-react": "^7.2.1",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "rebass": "^4.0.7"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
