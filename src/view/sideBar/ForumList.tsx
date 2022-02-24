@@ -1,24 +1,10 @@
-import { useEffect } from 'react'
 import { Box, Text } from 'rebass'
-import { proxy, useSnapshot } from 'valtio'
-import { getForumList } from '../../lib/ad-sdk/forum'
-import { ForumGroup, ForumList } from '../../lib/ad-sdk/model/forum'
-
-const state = proxy({
-  forumList: [] as ForumList,
-})
-
-function useForumList() {
-  const _state = useSnapshot(state)
-
-  useEffect(() => {
-    getForumList().then((res) => {
-      state.forumList = res
-    })
-  }, [])
-
-  return state.forumList
-}
+import { Forum, ForumGroup } from '../../lib/ad-sdk/model/forum'
+import {
+  useActiveForum,
+  useForumList,
+  useForumListState,
+} from '../../store/forumListState'
 
 export const ForumListView: React.FC = () => {
   const list = useForumList()
@@ -38,17 +24,34 @@ const ForumGroupItem: React.FC<FGProps> = ({ group }) => {
   return (
     <Box>
       <Text as="h3">{group.name}</Text>
-      <ForumNameItem group={group} />
+      <ForumItemWarpper group={group} />
     </Box>
   )
 }
 
-const ForumNameItem: React.FC<FGProps> = ({ group }) => {
+const ForumItemWarpper: React.FC<FGProps> = ({ group }) => {
   return (
     <Box>
       {group.forums.map((forum) => (
-        <Text key={forum.id} >{forum.name}</Text>
+        <ForumItem key={forum.id} forum={forum} />
       ))}
     </Box>
   )
+}
+
+interface FIProps {
+  forum: Forum
+}
+const ForumItem: React.FC<FIProps> = ({ forum }) => {
+  const state = useForumListState()
+  return (
+    <Text key={forum.id} onClick={() => state.active(forum.id)}>
+      {forum.name}
+    </Text>
+  )
+}
+
+export const ActiveForum: React.FC = () => {
+  const activeF = useActiveForum()
+  return <Text>active forum is {activeF?.name}</Text>
 }

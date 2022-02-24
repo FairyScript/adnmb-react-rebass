@@ -1,9 +1,13 @@
-import { ForumListView } from './view/sideBar/ForumList'
+import { Flex } from 'rebass'
+import { ActiveForum, ForumListView } from './view/sideBar/ForumList'
 
 function App() {
   return (
     <div className="App">
-      <ForumListView />
+      <Flex>
+        <ForumListView />
+        <ActiveForum />
+      </Flex>
     </div>
   )
 }
