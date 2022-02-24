@@ -1,4 +1,5 @@
-import { Box, Text } from 'rebass'
+import { Box, Button, Text } from 'rebass'
+import { useSnapshot } from 'valtio'
 import { Forum, ForumGroup } from '../../lib/ad-sdk/model/forum'
 import {
   useActiveForum,
@@ -53,5 +54,9 @@ const ForumItem: React.FC<FIProps> = ({ forum }) => {
 
 export const ActiveForum: React.FC = () => {
   const activeF = useActiveForum()
-  return <Text>active forum is {activeF?.name}</Text>
+  return (
+    <Box>
+      <Text>active forum is {activeF?.name}</Text>
+    </Box>
+  )
 }

@@ -17,6 +17,8 @@ const state = proxy({
   },
 })
 
+export { state as forumListState }
+
 export function useForumListState() {
   const _state = useSnapshot(state)
   return _state
