@@ -1,5 +1,4 @@
-import { Box, Button, Text } from 'rebass'
-import { useSnapshot } from 'valtio'
+import { Box, Text } from 'rebass'
 import { Forum, ForumGroup } from '../../lib/ad-sdk/model/forum'
 import {
   useActiveForum,
